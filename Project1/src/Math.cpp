@@ -111,3 +111,23 @@ glm::vec2 MathUtils::Math::randomInsideUnitCircle()
 	return randomPoint;
 }
 
+float MathUtils::Math::squareMagnitude(glm::vec2 value)
+{
+	return value.x * value.x + value.y * value.y;
+}
+
+glm::vec4 MathUtils::Math::LerpVec4(const glm::vec4& start, const glm::vec4& end, float t)
+{
+	return start + t * (end - start);
+}
+
+glm::vec3 MathUtils::Math::LerpVec3(const glm::vec3& start, const glm::vec3& end, float t)
+{
+	return start + t * (end - start);
+}
+
+glm::vec2 MathUtils::Math::LerpVec2(const glm::vec2& start, const glm::vec2& end, float t)
+{
+	return start + t * (end - start);
+}
+

@@ -64,9 +64,18 @@ void FlockAgent::OnDestroy()
 {
 }
 
-void FlockAgent::Move(glm::vec3 velocity)
+void FlockAgent::Move(const glm::vec3& velocity)
 {
-	transform.SetUp(velocity);
+	glm::vec3 direction = glm::normalize(velocity);
+
+	if (glm::length(direction) >= 0)
+	{
+
+		//glm::quat rotation = glm::quatLookAt(-direction, glm::vec3(0, 1, 0));
+
+		//transform.SetQuatRotation(rotation);
+	}
+
 
 	transform.position += velocity * (float)Time::GetInstance().deltaTime;
 }

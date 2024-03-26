@@ -228,6 +228,18 @@
     <ClCompile Include="src\AI\Flock\States\BaseBehaviour.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\AI\Flock\States\CohesionBehaviour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AI\Flock\States\AlignmentBehaviour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AI\Flock\States\AvoidanceBehaviour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AI\Flock\States\CompositeBehaviour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Shader.h">
@@ -465,6 +477,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\AI\Flock\States\State.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AI\Flock\States\CohesionBehaviour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AI\Flock\States\AlignmentBehaviour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AI\Flock\States\AvoidanceBehaviour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AI\Flock\States\CompositeBehaviour.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

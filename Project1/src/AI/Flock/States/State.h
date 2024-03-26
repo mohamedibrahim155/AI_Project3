@@ -2,7 +2,8 @@
 
 enum class Behaviour
 {
-	IDLE=0,
-	FLOCKING=1,
-	COHESION=2,
+	COHESION=0,
+	ALIGNMENT=1,
+	AVOIDANCE=2,
+	COMPOSITE=3,
 };

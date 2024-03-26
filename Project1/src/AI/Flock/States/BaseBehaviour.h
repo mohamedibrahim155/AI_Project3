@@ -1,13 +1,16 @@
 #pragma once
 #include "State.h"
+#include "glm/glm.hpp"
+#include <vector>
 class FlockAgent;
-
+class FlockManager;
+class Transform;
 
 class BaseBehaviour
 {
 public:
 
-	BaseBehaviour(FlockAgent* agent);
+	BaseBehaviour();
 
 	virtual void Start() = 0;
 	virtual void UpdateState(float deltaTime) = 0;
@@ -15,8 +18,9 @@ public:
 
 	virtual void OnBehaviourChange(Behaviour state);
 
-	Behaviour agentState = Behaviour::IDLE;
+	virtual glm::vec2 CalculateMove(FlockAgent* agent, std::vector<Transform*> context, FlockManager* flockManager) = 0;
+
+	Behaviour agentState = Behaviour::COHESION;
 private:
-	FlockAgent* agent =  nullptr;
 };
 

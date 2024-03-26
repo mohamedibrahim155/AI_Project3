@@ -1,8 +1,8 @@
 #include "BaseBehaviour.h"
 #include"../FlockAgent.h"
-BaseBehaviour::BaseBehaviour(FlockAgent* agent)
+
+BaseBehaviour::BaseBehaviour()
 {
-	this->agent = agent;
 }
 
 void BaseBehaviour::OnBehaviourChange(Behaviour state)

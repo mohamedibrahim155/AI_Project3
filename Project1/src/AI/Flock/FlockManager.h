@@ -2,7 +2,7 @@
 #include "FlockAgent.h"
 #include "../../EntityManager/EntityManager.h"
 #include "States/BaseBehaviour.h"
-
+#include <unordered_map>
 class FlockManager : public Entity
 {
 public:
@@ -20,25 +20,37 @@ public:
 	void AddAgent(FlockAgent* agent);
 	void RemoveAgent(FlockAgent* agent);
 
+	void AddBehaviourState(Behaviour state, BaseBehaviour* currentBehaviour);
+	void RomoveBehaviourState(Behaviour state);
+
+	BaseBehaviour* GetBehaviourState(Behaviour state);
+
 	void OnBehaviourChange(Behaviour state);
 
-	BaseBehaviour* GetCurrentBehaviour();
 	float GetSquareAvoidanceRadius();
+	std::vector<Transform*> GetNearByObjects(FlockAgent* agent);
+	BaseBehaviour* GetCurrentBehaviour();
+
+
 
 private:
 	float agentDensity = 0.8f;
-	float driveFactor = 10.0f;
-	float maxSpeed = 5.0f;
+	float driveFactor = 5.0f;
+	float maxSpeed = 5;
 	float neighbourRadius = 1.5f;
 	float avoidanceRadiusMultiplier = 0.5f;
 	float squaredMaxSpeed;
 	float squareAvoidanceRadius;
 	float squareNeighbourRadius;
 
-	int flockAgentCount = 10;
+	int flockAgentCount = 20;
+	bool showDebug = true;
 
 	std::vector<FlockAgent*> listOfFlockAgents;
-	BaseBehaviour* behaviour;
+	std::unordered_map<Behaviour, BaseBehaviour*> listOfBehaviours;
+
+	BaseBehaviour* currentBehaviour;
+
 
 
 };

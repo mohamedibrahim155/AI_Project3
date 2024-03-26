@@ -141,6 +141,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Dependencies\glad\src\glad.c" />
+    <ClCompile Include="src\AI\Flock\States\CompositeBehaviour.cpp" />
+    <ClCompile Include="src\AI\Flock\States\AlignmentBehaviour.cpp" />
+    <ClCompile Include="src\AI\Flock\States\AvoidanceBehaviour.cpp" />
+    <ClCompile Include="src\AI\Flock\States\CohesionBehaviour.cpp" />
     <ClCompile Include="src\AI\Flock\States\BaseBehaviour.cpp" />
     <ClCompile Include="Extern\imGui\ImCurveEdit.cpp" />
     <ClCompile Include="Extern\imGui\ImGradient.cpp" />
@@ -213,6 +217,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\stb_image.h" />
+    <ClInclude Include="src\AI\Flock\States\CompositeBehaviour.h" />
+    <ClInclude Include="src\AI\Flock\States\AlignmentBehaviour.h" />
+    <ClInclude Include="src\AI\Flock\States\AvoidanceBehaviour.h" />
+    <ClInclude Include="src\AI\Flock\States\CohesionBehaviour.h" />
     <ClInclude Include="src\AI\Flock\States\BaseBehaviour.h" />
     <ClInclude Include="Extern\imGui\ImCurveEdit.h" />
     <ClInclude Include="Extern\imGui\ImGradient.h" />
