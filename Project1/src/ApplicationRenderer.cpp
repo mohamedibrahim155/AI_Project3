@@ -215,25 +215,7 @@ void ApplicationRenderer::Start()
      directionLight->transform.SetRotation(glm::vec3(0, 0, 5));
      directionLight->transform.SetPosition(glm::vec3(0, 0, 5));
     
-
-
-   //  Model* plant = new Model("Models/Plant.fbm/Plant.fbx");
- 
-     //Model* characterModel = new Model("Models/Character/X Bot.fbx");
-     //characterModel->name = "CharacterModel";
-     //characterModel->transform.SetScale(glm::vec3(0.01f));
-
-    // Model* characterModel = new Model("Models/Character/Adventurer Aland@Idle.fbx");
-     //GraphicsRender::GetInstance().AddModelAndShader(characterModel, defaultShader);
-
-    // SkinnedMeshRenderer* xBot = new SkinnedMeshRenderer("Models/Character/X Bot.fbx");
-    // xBot->transform.SetScale(glm::vec3(0.01f));
-    //
-    // xBot->LoadAnimation("Models/Character/Rumba Dancing.fbx");
-    //
-    // GraphicsRender::GetInstance().AddModelAndShader(xBot, animationShader);
-
-     CharacterAnimation* character = new CharacterAnimation();
+     FlockManager* flockManager = new FlockManager();
 
 }
 

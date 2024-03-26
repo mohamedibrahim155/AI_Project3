@@ -4,13 +4,13 @@ Enemy::Enemy(EnemyInfo& enemy)
 {
 	enemyInfo = enemy;
 
-	LoadModel("Models/Zombie/zombies.obj");
+	LoadModel("Models/DefaultQuad/DefaultQuad.fbx");
 
 	transform.SetScale(glm::vec3(0.5f));
 	GraphicsRender::GetInstance().AddModelAndShader(this, GraphicsRender::GetInstance().defaultShader);
 	AddState(IDLE, new IdleState(this));
 
-	
+	//transform.SetUp()
 }
 
 

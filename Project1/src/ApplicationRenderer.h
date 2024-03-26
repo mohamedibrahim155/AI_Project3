@@ -28,6 +28,7 @@
 #include "CameraManager.h"
 #include "SkinnedMeshRenderer.h"
 #include "CharacterAnimation/CharacterAnimation.h"
+#include "AI/Flock/FlockManager.h"
 class ApplicationRenderer
 {
 public:
