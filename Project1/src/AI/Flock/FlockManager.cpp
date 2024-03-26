@@ -8,6 +8,7 @@
 #include "States/AvoidanceBehaviour.h"
 #include "States/CompositeBehaviour.h"
 #include "States/SteeredCohesionBehaviour.h"
+#include "States/StayInRadiusBehaviour.h"
 #include "../../GraphicsRender.h"
 using namespace MathUtils;
 
@@ -21,19 +22,23 @@ FlockManager::FlockManager()
     AddBehaviourState(Behaviour::ALIGNMENT, new AlignmentBehaviour());
     AddBehaviourState(Behaviour::COMPOSITE, new CompositeBehaviour());
     AddBehaviourState(Behaviour::STEERED, new SteeredCohesionBehaviour());
+    AddBehaviourState(Behaviour::STAYINSIDE_RANGE, new StayInRadiusBehaviour());
 
     currentBehaviour = GetBehaviourState(Behaviour::COMPOSITE);
 
-    //((CompositeBehaviour*)currentBehaviour)->behaviours.push_back(GetBehaviourState(Behaviour::COHESION));
+    ////((CompositeBehaviour*)currentBehaviour)->behaviours.push_back(GetBehaviourState(Behaviour::COHESION));
     ((CompositeBehaviour*)currentBehaviour)->behaviours.push_back(GetBehaviourState(Behaviour::STEERED));
     ((CompositeBehaviour*)currentBehaviour)->behaviours.push_back(GetBehaviourState(Behaviour::ALIGNMENT));
     ((CompositeBehaviour*)currentBehaviour)->behaviours.push_back(GetBehaviourState(Behaviour::AVOIDANCE));
+    ((CompositeBehaviour*)currentBehaviour)->behaviours.push_back(GetBehaviourState(Behaviour::STAYINSIDE_RANGE));
 
 
     ((CompositeBehaviour*)currentBehaviour)->weights.push_back(4);
     ((CompositeBehaviour*)currentBehaviour)->weights.push_back(1);
     ((CompositeBehaviour*)currentBehaviour)->weights.push_back(2);
+    ((CompositeBehaviour*)currentBehaviour)->weights.push_back(3);
 
+    //currentBehaviour = GetBehaviourState(Behaviour::ALIGNMENT);
 
 }
 
@@ -59,7 +64,8 @@ void FlockManager::Start()
     for (int i = 0; i < flockAgentCount; i++)
     {
         glm::vec2 position = Math::randomInsideUnitCircle() * (float)flockAgentCount * agentDensity;
-
+       // position.x = Math::GetRandomFloatNumber(-5, 5);
+       // position.y = Math::GetRandomFloatNumber(-5, 5);
         FlockAgent* newAgent = new FlockAgent(glm::vec3(position,0));
 
         glm::vec3 forward = glm::vec3(0, 0, 1);
@@ -73,10 +79,17 @@ void FlockManager::Start()
 
     }
 
+    allAgentSpawned = true;
 }
 
 void FlockManager::Update(float deltaTime)
 {
+    if (!allAgentSpawned)
+    {
+        return;
+    }
+    squareAvoidanceRadius = squareNeighbourRadius * avoidanceRadiusMultiplier * avoidanceRadiusMultiplier;
+
     for (FlockAgent* agent : listOfFlockAgents)
     {
         std::vector<Transform*> context = GetNearByObjects(agent);
@@ -87,15 +100,16 @@ void FlockManager::Update(float deltaTime)
 
         agent->SetAgentColor(lerpValue);
 
-        glm::vec2 move = GetCurrentBehaviour()->CalculateMove(agent, context, this);
+        glm::vec3 move = GetCurrentBehaviour()->CalculateMove(agent, context, this);
 
-        move *= driveFactor;
+        //if (move.x =0 && move.y == 0 && move.z == 0) return;
+       // move *= driveFactor;
 
         if (Math::squareMagnitude(move) > squaredMaxSpeed )
         {
             move = glm::normalize(move) * maxSpeed;
         }
-        agent->Move(glm::vec3(move, transform.position.z));
+        agent->Move(move);
 
     }
 }
@@ -111,10 +125,42 @@ void FlockManager::Render()
     for (FlockAgent* agent : listOfFlockAgents)
     {
         GraphicsRender::GetInstance().DrawSphere(agent->transform.position,
-            neighbourRadius, 
+            neighbourRadius,
             glm::vec4(0, 0.25f, 1, 1)
             , true);
     }
+}
+
+void FlockManager::DrawProperties()
+{
+    Entity::DrawProperties();
+
+    if (!ImGui::TreeNodeEx("FlockManager", ImGuiTreeNodeFlags_DefaultOpen))
+    {
+        return;
+    }
+
+    ImGui::Text("Show debug");
+    ImGui::SameLine();
+    if (!ImGui::Checkbox("###ShowDebug",&showDebug))
+    {
+        ImGui::Text("Avoidaance Multiplier");
+        ImGui::SameLine();
+        ImGui::DragFloat("##AvoidaanceMultiplier", &avoidanceRadiusMultiplier, 0.1f, 0, 0, "%0.2f");
+
+        ImGui::Text("Neighbour radius");
+        ImGui::SameLine();
+        ImGui::DragFloat("##Neighbourradius", &neighbourRadius, 0.1f, 0, 0, "%0.2f");
+
+    }
+ 
+
+    ImGui::TreePop();
+}
+
+void FlockManager::SceneDraw()
+{
+    Entity::SceneDraw();
 }
 
 void FlockManager::AddAgent(FlockAgent* agent)
@@ -178,9 +224,9 @@ std::vector<Transform*> FlockManager::GetNearByObjects(FlockAgent* agent)
         float distance = glm::length(agent->transform.position
             - otheragent->transform.position);
 
-        //if (glm::length(displacement) >= 0);
+        //if (distance > 0);
         {
-            if (distance <= neighbourRadius)
+            if (distance < neighbourRadius)
             {
                 context.push_back(&otheragent->transform);
             }

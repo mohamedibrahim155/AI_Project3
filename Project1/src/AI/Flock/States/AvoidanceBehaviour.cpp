@@ -17,22 +17,22 @@ void AvoidanceBehaviour::Render()
 {
 }
 
-glm::vec2 AvoidanceBehaviour::CalculateMove(FlockAgent* agent, std::vector<Transform*> context, FlockManager* flockManager)
+glm::vec3 AvoidanceBehaviour::CalculateMove(FlockAgent* agent, std::vector<Transform*> context, FlockManager* flockManager)
 {
 	if (context.size() == 0)
-		return glm::vec2(0);
+		return glm::vec3(0);
 
-	glm::vec2 avoidanceMove = glm::vec2(0);
+	glm::vec3 avoidanceMove = glm::vec3(0);
 	int avoidCount = 0;
 
 
 	for (Transform* transform : context)
 	{
-		if (Math::squareMagnitude(transform->position - agent->transform.position) < flockManager->GetSquareAvoidanceRadius())
+		if (Math::squareMagnitudeVec3(transform->position - agent->transform.position) < flockManager->GetSquareAvoidanceRadius())
 		{
 			avoidCount++;
 
-			avoidanceMove += glm::vec2(agent->transform.position - transform->position);
+			avoidanceMove += glm::vec3(agent->transform.position - transform->position);
 		}
 		
 	}

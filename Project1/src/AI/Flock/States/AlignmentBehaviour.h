@@ -7,7 +7,7 @@ public:
 	void Start() override;
 	void UpdateState(float deltaTime) override;
 	void Render() override;
-	glm::vec2 CalculateMove(FlockAgent* agent, std::vector<Transform*> context, FlockManager* flockManager) override;
+	glm::vec3 CalculateMove(FlockAgent* agent, std::vector<Transform*> context, FlockManager* flockManager) override;
 };
 
 

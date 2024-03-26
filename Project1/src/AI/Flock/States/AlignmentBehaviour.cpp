@@ -13,16 +13,16 @@ void AlignmentBehaviour::Render()
 {
 }
 
-glm::vec2 AlignmentBehaviour::CalculateMove(FlockAgent* agent, std::vector<Transform*> context, FlockManager* flockManager)
+glm::vec3 AlignmentBehaviour::CalculateMove(FlockAgent* agent, std::vector<Transform*> context, FlockManager* flockManager)
 {
 	if (context.size() == 0)
-		return glm::vec2(agent->transform.GetUp());
+		return glm::vec3(agent->transform.GetUp());
 
-	glm::vec2 alignMove = glm::vec2(0);
+	glm::vec3 alignMove = glm::vec3(0);
 
 	for (Transform* transform : context)
 	{
-		alignMove += glm::vec2(transform->GetUp());
+		alignMove += glm::vec3(transform->GetUp());
 	}
 
 	alignMove /= context.size();

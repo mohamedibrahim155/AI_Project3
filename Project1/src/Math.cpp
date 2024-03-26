@@ -111,9 +111,21 @@ glm::vec2 MathUtils::Math::randomInsideUnitCircle()
 	return randomPoint;
 }
 
+glm::vec3 MathUtils::Math::randomInsideUnitSphereVec3()
+{
+	glm::vec3 randomPoint = glm::ballRand(1.0f);
+	return randomPoint;
+}
+
 float MathUtils::Math::squareMagnitude(glm::vec2 value)
 {
 	return value.x * value.x + value.y * value.y;
+}
+
+float MathUtils::Math::squareMagnitudeVec3(glm::vec3 value)
+{
+	return value.x * value.x + value.y * value.y + value.z * value.z;
+
 }
 
 glm::vec4 MathUtils::Math::LerpVec4(const glm::vec4& start, const glm::vec4& end, float t)

@@ -215,6 +215,7 @@
     <ClCompile Include="src\ImGui\WindowDockingPanel.cpp" />
     <ClCompile Include="src\ImGui\ToolPanel.cpp" />
     <ClCompile Include="src\AI\Flock\States\SteeredCohesionBehaviour.cpp" />
+    <ClCompile Include="src\AI\Flock\States\StayInRadiusBehaviour.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\stb_image.h" />
@@ -301,6 +302,7 @@
     <ClInclude Include="src\ImGui\WindowDockingPanel.h" />
     <ClInclude Include="src\ImGui\ToolPanel.h" />
     <ClInclude Include="src\AI\Flock\States\SteeredCohesionBehaviour.h" />
+    <ClInclude Include="src\AI\Flock\States\StayInRadiusBehaviour.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\AnimationShader.frag" />

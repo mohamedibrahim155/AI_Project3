@@ -7,4 +7,5 @@ enum class Behaviour
 	AVOIDANCE=2,
 	COMPOSITE=3,
 	STEERED=4,
+	STAYINSIDE_RANGE=5
 };

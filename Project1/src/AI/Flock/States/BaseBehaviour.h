@@ -18,7 +18,7 @@ public:
 
 	virtual void OnBehaviourChange(Behaviour state);
 
-	virtual glm::vec2 CalculateMove(FlockAgent* agent, std::vector<Transform*> context, FlockManager* flockManager) = 0;
+	virtual glm::vec3 CalculateMove(FlockAgent* agent, std::vector<Transform*> context, FlockManager* flockManager) = 0;
 
 	Behaviour agentState = Behaviour::COHESION;
 private:

@@ -17,21 +17,21 @@ void CompositeBehaviour::Render()
 {
 }
 
-glm::vec2 CompositeBehaviour::CalculateMove(FlockAgent* agent, std::vector<Transform*> context, FlockManager* flockManager)
+glm::vec3 CompositeBehaviour::CalculateMove(FlockAgent* agent, std::vector<Transform*> context, FlockManager* flockManager)
 {
 	if (weights.size()!= behaviours.size())
 	{
 		std::cout << "Error with Behaviour Count" << std::endl;
-		return glm::vec2(0);
+		return glm::vec3(0);
 	}
 
-	glm::vec2 move = glm::vec2(0);
+	glm::vec3 move = glm::vec3(0);
 
 	for (int i = 0; i < behaviours.size(); i++)
 	{
-		glm::vec2 partialMove = behaviours[i]->CalculateMove(agent, context, flockManager) * weights[i];
+		glm::vec3 partialMove = behaviours[i]->CalculateMove(agent, context, flockManager) * weights[i];
 
-		if (partialMove != glm::vec2(0))
+		if (partialMove != glm::vec3(0))
 		{
 			if (Math::squareMagnitude(partialMove) > weights[i] * weights[i])
 			{

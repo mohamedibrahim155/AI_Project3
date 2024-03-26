@@ -16,6 +16,8 @@ public:
 	void Update(float deltaTime) override;
 	void OnDestroy() override;
 	void Render() override;
+	void DrawProperties()override;
+	void SceneDraw()override;
 
 	void AddAgent(FlockAgent* agent);
 	void RemoveAgent(FlockAgent* agent);
@@ -34,18 +36,18 @@ public:
 
 
 private:
-	float agentDensity = 0.8f;
-	float driveFactor = 5.0f;
-	float maxSpeed = 1;
-	float neighbourRadius = 1.5f;
-	float avoidanceRadiusMultiplier = 0.5f;
+	float agentDensity = 0.5f;
+	float driveFactor = 5;
+	float maxSpeed = 2;
+	float neighbourRadius = 1;
+	float avoidanceRadiusMultiplier = 1.5f;
 	float squaredMaxSpeed;
 	float squareAvoidanceRadius;
 	float squareNeighbourRadius;
 
-	int flockAgentCount = 20;
-	bool showDebug = false;
-
+	int flockAgentCount = 50;
+	bool showDebug = true;
+	bool allAgentSpawned = false;
 	std::vector<FlockAgent*> listOfFlockAgents;
 	std::unordered_map<Behaviour, BaseBehaviour*> listOfBehaviours;
 
