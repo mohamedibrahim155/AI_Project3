@@ -214,6 +214,7 @@
     <ClCompile Include="src\UnLitMaterial.cpp" />
     <ClCompile Include="src\ImGui\WindowDockingPanel.cpp" />
     <ClCompile Include="src\ImGui\ToolPanel.cpp" />
+    <ClCompile Include="src\AI\Flock\States\SteeredCohesionBehaviour.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\stb_image.h" />
@@ -299,6 +300,7 @@
     <ClInclude Include="src\UnLitMaterial.h" />
     <ClInclude Include="src\ImGui\WindowDockingPanel.h" />
     <ClInclude Include="src\ImGui\ToolPanel.h" />
+    <ClInclude Include="src\AI\Flock\States\SteeredCohesionBehaviour.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\AnimationShader.frag" />

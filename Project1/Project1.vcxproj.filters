@@ -240,6 +240,9 @@
     <ClCompile Include="src\AI\Flock\States\CompositeBehaviour.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\AI\Flock\States\SteeredCohesionBehaviour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Shader.h">
@@ -489,6 +492,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\AI\Flock\States\CompositeBehaviour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AI\Flock\States\SteeredCohesionBehaviour.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

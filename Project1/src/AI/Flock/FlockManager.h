@@ -36,7 +36,7 @@ public:
 private:
 	float agentDensity = 0.8f;
 	float driveFactor = 5.0f;
-	float maxSpeed = 5;
+	float maxSpeed = 1;
 	float neighbourRadius = 1.5f;
 	float avoidanceRadiusMultiplier = 0.5f;
 	float squaredMaxSpeed;
@@ -44,7 +44,7 @@ private:
 	float squareNeighbourRadius;
 
 	int flockAgentCount = 20;
-	bool showDebug = true;
+	bool showDebug = false;
 
 	std::vector<FlockAgent*> listOfFlockAgents;
 	std::unordered_map<Behaviour, BaseBehaviour*> listOfBehaviours;

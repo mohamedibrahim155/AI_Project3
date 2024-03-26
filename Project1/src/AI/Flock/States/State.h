@@ -6,4 +6,5 @@ enum class Behaviour
 	ALIGNMENT=1,
 	AVOIDANCE=2,
 	COMPOSITE=3,
+	STEERED=4,
 };

@@ -36,7 +36,7 @@ private:
 
     CircleCollider agentCollider;
 
-    glm::vec3 agentScale{ 0.10f };
+    glm::vec3 agentScale{ 0.25f };
     glm::vec4 agentDefaultColor{ 0,1,0,1 };
     glm::vec4 agentRenderColor{0.8f,0.8f,0,1 };
 

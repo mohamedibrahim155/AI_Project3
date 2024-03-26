@@ -16,6 +16,13 @@ namespace MathUtils
 		static glm::vec4 LerpVec4(const glm::vec4& start, const glm::vec4& end, float t);
 		static glm::vec3 LerpVec3(const glm::vec3& start, const glm::vec3& end, float t);
 		static glm::vec2 LerpVec2(const glm::vec2& start, const glm::vec2& end, float t);
+
+		static float SmoothDamp(float current, float target, float& currentVelocity, float smoothTime, float maxSpeed, float deltaTime);
+		static glm::vec2 SmoothDampVec2(glm::vec2 current, glm::vec2 target, glm::vec2& currentVelocity, float smoothTime, float maxSpeed, float deltaTime);
+		static glm::vec3 SmoothDampVec3(glm::vec3 current, glm::vec3 target, glm::vec3& currentVelocity, float smoothTime, float maxSpeed, float deltaTime);
+		static glm::vec4 SmoothDampVec4(glm::vec4 current, glm::vec4 target, glm::vec4& currentVelocity, float smoothTime, float maxSpeed, float deltaTime);
+
+
 	};
 
 }

@@ -1,6 +1,7 @@
 #include "FlockAgent.h"
 #include "../../Time.h"
 #include "../../GraphicsRender.h"
+#include "../../Time.h"
 FlockAgent::FlockAgent(const glm::vec3& postion)
 {
 	LoadModel("Models/DefaultCube/DefaultCube.fbx");
@@ -71,9 +72,13 @@ void FlockAgent::Move(const glm::vec3& velocity)
 	if (glm::length(direction) >= 0)
 	{
 
-		//glm::quat rotation = glm::quatLookAt(-direction, glm::vec3(0, 1, 0));
+		glm::quat rotation = glm::quatLookAt(-direction, glm::vec3(0, 1, 0));
 
-		//transform.SetQuatRotation(rotation);
+
+		glm::quat lerpValue = glm::slerp(transform.quaternionRotation, rotation, (float)Time::GetInstance().deltaTime);
+
+
+		transform.SetQuatRotation(lerpValue);
 	}
 
 

@@ -7,6 +7,7 @@
 #include "States/AlignmentBehaviour.h"
 #include "States/AvoidanceBehaviour.h"
 #include "States/CompositeBehaviour.h"
+#include "States/SteeredCohesionBehaviour.h"
 #include "../../GraphicsRender.h"
 using namespace MathUtils;
 
@@ -19,10 +20,12 @@ FlockManager::FlockManager()
     AddBehaviourState(Behaviour::AVOIDANCE, new AvoidanceBehaviour());
     AddBehaviourState(Behaviour::ALIGNMENT, new AlignmentBehaviour());
     AddBehaviourState(Behaviour::COMPOSITE, new CompositeBehaviour());
+    AddBehaviourState(Behaviour::STEERED, new SteeredCohesionBehaviour());
 
     currentBehaviour = GetBehaviourState(Behaviour::COMPOSITE);
 
-    ((CompositeBehaviour*)currentBehaviour)->behaviours.push_back(GetBehaviourState(Behaviour::COHESION));
+    //((CompositeBehaviour*)currentBehaviour)->behaviours.push_back(GetBehaviourState(Behaviour::COHESION));
+    ((CompositeBehaviour*)currentBehaviour)->behaviours.push_back(GetBehaviourState(Behaviour::STEERED));
     ((CompositeBehaviour*)currentBehaviour)->behaviours.push_back(GetBehaviourState(Behaviour::ALIGNMENT));
     ((CompositeBehaviour*)currentBehaviour)->behaviours.push_back(GetBehaviourState(Behaviour::AVOIDANCE));
 
