@@ -102,13 +102,13 @@ void FlockManager::Update(float deltaTime)
 
         glm::vec3 move = GetCurrentBehaviour()->CalculateMove(agent, context, this);
 
-        //if (move.x =0 && move.y == 0 && move.z == 0) return;
-       // move *= driveFactor;
+        move *= driveFactor;
 
-        if (Math::squareMagnitude(move) > squaredMaxSpeed )
+        if (glm::length(move) > squaredMaxSpeed )
         {
             move = glm::normalize(move) * maxSpeed;
         }
+
         agent->Move(move);
 
     }

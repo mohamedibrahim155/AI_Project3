@@ -31,7 +31,7 @@ glm::vec3 SteeredCohesionBehaviour::CalculateMove(FlockAgent* agent, std::vector
 
 	cohesionMove /= context.size();
 
-	cohesionMove += glm::vec3(agent->transform.position) /**2.0f*/;
+	cohesionMove -= glm::vec3(agent->transform.position) /**2.0f*/;
 
 	
 	cohesionMove = Math::SmoothDampVec3(

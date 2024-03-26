@@ -45,7 +45,7 @@ private:
 	float squareAvoidanceRadius;
 	float squareNeighbourRadius;
 
-	int flockAgentCount = 50;
+	int flockAgentCount = 20;
 	bool showDebug = true;
 	bool allAgentSpawned = false;
 	std::vector<FlockAgent*> listOfFlockAgents;

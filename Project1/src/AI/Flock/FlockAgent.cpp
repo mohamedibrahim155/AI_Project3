@@ -68,21 +68,15 @@ void FlockAgent::OnDestroy()
 void FlockAgent::Move(const glm::vec3& velocity)
 {
 	glm::vec3 previousPos = transform.position - velocity;
-	glm::vec3 direction = glm::normalize(previousPos);
+	glm::vec3 direction = glm::normalize(velocity);
 
 	if (glm::length(direction) != 0)
 	{
 
-		glm::quat rotation = glm::quatLookAt(-direction, glm::vec3(0, 1, 0));
 
-
-		glm::quat lerpValue = glm::slerp(transform.quaternionRotation, rotation, (float)Time::GetInstance().deltaTime);
-
-
-		transform.SetQuatRotation(lerpValue);
+		transform.SetOrientationFromDirections(direction, transform.GetForward());
 
 	}
-	
 
 	transform.SetPosition( transform.position + velocity * (float)Time::GetInstance().deltaTime);
 
