@@ -31,3 +31,8 @@ glm::vec3 StayInRadiusBehaviour::CalculateMove(FlockAgent* agent, std::vector<Tr
 
     return centreOffset * t * t;
 }
+
+void StayInRadiusBehaviour::SetRadius(float radius)
+{
+    this->radius = radius;
+}

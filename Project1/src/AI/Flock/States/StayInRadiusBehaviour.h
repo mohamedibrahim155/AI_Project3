@@ -16,5 +16,6 @@ class StayInRadiusBehaviour : public BaseBehaviour
 
 		glm::vec3 CalculateMove(FlockAgent* agent, std::vector<Transform*> context, FlockManager* flockManager) override;
 
+		void SetRadius(float radius);
 };
 

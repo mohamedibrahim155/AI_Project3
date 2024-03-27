@@ -179,12 +179,16 @@ void ApplicationRenderer::InitializeSkybox()
 
     std::vector<std::string> faces
     {
-       ("Textures/skybox/right.jpg"),
-       ("Textures/skybox/left.jpg"),
-       ("Textures/skybox/top.jpg"),
-       ("Textures/skybox/bottom.jpg"),
-       ("Textures/skybox/front.jpg"),
-       ("Textures/skybox/back.jpg")
+       ("Textures/DefaultTextures/Default_Specular.jpg"),
+       ("Textures/DefaultTextures/Default_Specular.jpg"),
+       ("Textures/DefaultTextures/Default_Specular.jpg"),
+       ("Textures/DefaultTextures/Default_Specular.jpg"),
+       ("Textures/DefaultTextures/Default_Specular.jpg")
+       //("Textures/skybox/left.jpg"),
+       //("Textures/skybox/top.jpg"),
+       //("Textures/skybox/bottom.jpg"),
+       //("Textures/skybox/front.jpg"),
+       //("Textures/skybox/back.jpg")
     };
 
     skyBoxMaterial->skyBoxTexture->LoadTexture(faces);
@@ -215,6 +219,8 @@ void ApplicationRenderer::Start()
      directionLight->transform.SetRotation(glm::vec3(0, 0, 5));
      directionLight->transform.SetPosition(glm::vec3(0, 0, 5));
     
+     directionLight->isVisible = false;
+
      FlockManager* flockManager = new FlockManager();
 
 }

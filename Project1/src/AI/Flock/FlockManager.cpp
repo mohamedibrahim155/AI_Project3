@@ -77,7 +77,7 @@ void FlockManager::Update(float deltaTime)
         
         glm::vec4 white = glm::vec4(1);
         glm::vec4 red = glm::vec4(1, 0, 0, 1);
-        glm::vec4 lerpValue = Math::LerpVec4(white, red, context.size()/3.0f);
+        glm::vec4 lerpValue = Math::LerpVec4(white, red, context.size()/2.0f);
 
         agent->SetAgentColor(lerpValue);
 
@@ -131,8 +131,6 @@ void FlockManager::IntializeFlocks(int alreadySpawnedCount)
     for (int i = 0; i < agentRequiredCount; i++)
     {
         glm::vec2 position = Math::randomInsideUnitCircle() * ((float)flockAgentCount +(float)agentRequiredCount)  * agentDensity;
-        // position.x = Math::GetRandomFloatNumber(-5, 5);
-        // position.y = Math::GetRandomFloatNumber(-5, 5);
         FlockAgent* newAgent = new FlockAgent(glm::vec3(position, 0));
 
         glm::vec3 forward = glm::vec3(0, 0, 1);
@@ -207,20 +205,32 @@ void FlockManager::DrawFlockManagerProperties()
     {
         ImGui::Text("Flocks Count");
         ImGui::SameLine();
+        ImGui::SetNextItemWidth(150);
         ImGui::DragInt("##FlockCount", &flockAgentCount, 0.1f, 0, 50);
 
         ImGui::Text("Avoidaance Radius");
         ImGui::SameLine();
+        ImGui::SetNextItemWidth(150);
         ImGui::DragFloat("##AvoidanceMultiplier", &avoidanceRadiusMultiplier, 0.1f, 0, 0, "%0.2f");
 
         ImGui::Text("Neighbour radius");
         ImGui::SameLine();
+        ImGui::SetNextItemWidth(150);
+
         ImGui::DragFloat("##Neighbourradius", &neighbourRadius, 0.1f, 0.0f, 3.0f, "%0.2f");
 
         ImGui::Text("Max Speed");
         ImGui::SameLine();
+        ImGui::SetNextItemWidth(150);
         ImGui::DragFloat("##maxSpeed", &maxSpeed, 0.1f, 0, 0, "%0.2f");
 
+        ImGui::Text("Area Radius");
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth(150);
+        if (!ImGui::DragFloat("##AreaRadius", &areaRadius, 0.1f, 0, 25, "%0.2f"))
+        {
+            ((StayInRadiusBehaviour*)GetBehaviourState(Behaviour::STAYINSIDE_RANGE))->SetRadius(areaRadius);
+        }
 
     }
 

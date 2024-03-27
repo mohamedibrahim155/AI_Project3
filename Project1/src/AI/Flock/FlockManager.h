@@ -41,12 +41,13 @@ private:
 	float driveFactor = 5;
 	float maxSpeed = 2;
 	float neighbourRadius = 1.2f;
-	float avoidanceRadiusMultiplier = 0.5f;
+	float avoidanceRadiusMultiplier = 0.7f;
 	float squaredMaxSpeed;
 	float squareAvoidanceRadius;
 	float squareNeighbourRadius;
+	float areaRadius = 15.0f;
 
-	int flockAgentCount = 20;
+	int flockAgentCount = 30;
 	bool showDebug = false;
 	bool allAgentSpawned = false;
 	std::vector<FlockAgent*> listOfFlockAgents;
