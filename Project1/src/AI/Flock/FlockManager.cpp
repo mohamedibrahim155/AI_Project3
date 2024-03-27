@@ -194,6 +194,8 @@ BaseBehaviour* FlockManager::GetCurrentBehaviour()
 
 void FlockManager::DrawFlockManagerProperties()
 {
+    ImGui::NewLine();
+
     if (!ImGui::TreeNodeEx("FlockManager", ImGuiTreeNodeFlags_DefaultOpen))
     {
         return;

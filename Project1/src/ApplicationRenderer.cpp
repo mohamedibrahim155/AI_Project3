@@ -541,29 +541,7 @@ void ApplicationRenderer::ProcessInput(GLFWwindow* window)
 
  void ApplicationRenderer::KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods)
  {  
-         if (key == GLFW_KEY_V && action == GLFW_PRESS)
-         {
 
-            
-             std::cout << "V pressed" << std::endl;
-
-             std::vector<Model*> listOfModels = GraphicsRender::GetInstance().GetModelList();
-            
-          
-
-             selectedModelCount++;
-
-             if (selectedModelCount > listOfModels.size()-1)
-             {
-                 selectedModelCount = 0;
-             }
-
-            
-             GraphicsRender::GetInstance().selectedModel = listOfModels[selectedModelCount];
-
-
-         }
-     
          if (action == GLFW_PRESS)
          {
              InputManager::GetInstance().OnKeyPressed(key);
