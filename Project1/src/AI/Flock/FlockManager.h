@@ -18,6 +18,8 @@ public:
 	void Render() override;
 	void DrawProperties()override;
 	void SceneDraw()override;
+	void IntializeFlocks(int alreadySpawnedCount);
+
 
 	void AddAgent(FlockAgent* agent);
 	void RemoveAgent(FlockAgent* agent);
@@ -34,19 +36,18 @@ public:
 	BaseBehaviour* GetCurrentBehaviour();
 
 
-
 private:
 	float agentDensity = 0.5f;
 	float driveFactor = 5;
 	float maxSpeed = 2;
-	float neighbourRadius = 1;
-	float avoidanceRadiusMultiplier = 1.5f;
+	float neighbourRadius = 1.2f;
+	float avoidanceRadiusMultiplier = 0.5f;
 	float squaredMaxSpeed;
 	float squareAvoidanceRadius;
 	float squareNeighbourRadius;
 
 	int flockAgentCount = 20;
-	bool showDebug = true;
+	bool showDebug = false;
 	bool allAgentSpawned = false;
 	std::vector<FlockAgent*> listOfFlockAgents;
 	std::unordered_map<Behaviour, BaseBehaviour*> listOfBehaviours;
@@ -54,6 +55,7 @@ private:
 	BaseBehaviour* currentBehaviour;
 
 
+	void DrawFlockManagerProperties();
 
 };
 

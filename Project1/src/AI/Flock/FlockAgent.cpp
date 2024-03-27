@@ -5,6 +5,7 @@
 FlockAgent::FlockAgent(const glm::vec3& postion)
 {
 	LoadModel("Models/DefaultCube/DefaultCube.fbx");
+	//LoadModel("Models/DefaultQuad/DefaultQuad.fbx");
 
 	GraphicsRender::GetInstance().AddModelAndShader(this, GraphicsRender::GetInstance().defaultShader);
 	
@@ -19,6 +20,7 @@ FlockAgent::FlockAgent(const glm::vec3& postion)
 FlockAgent::FlockAgent()
 {
 	LoadModel("Models/DefaultCube/DefaultCube.fbx");
+	//LoadModel("Models/DefaultQuad/DefaultQuad.fbx");
 
 	GraphicsRender::GetInstance().AddModelAndShader(this, GraphicsRender::GetInstance().defaultShader);
 	
@@ -74,7 +76,7 @@ void FlockAgent::Move(const glm::vec3& velocity)
 	{
 
 
-		transform.SetOrientationFromDirections(direction, transform.GetForward());
+		transform.SetOrientationFromDirections(direction, -transform.GetRight());
 
 	}
 

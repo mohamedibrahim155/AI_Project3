@@ -125,11 +125,11 @@ void ApplicationRenderer::WindowInitialize(int width, int height,  std::string w
     GraphicsRender::GetInstance().SetCamera(sceneViewcamera);
 
     sceneViewcamera->InitializeCamera(CameraType::PERSPECTIVE, 45.0f, 0.1f, 100.0f);
-    sceneViewcamera->transform.position = glm::vec3(0, 1.00, 5);
+    sceneViewcamera->transform.position = glm::vec3(0, 1.00, 37.0f);
     sceneViewcamera->transform.SetRotation(glm::vec3(0));
 
     gameScenecamera->InitializeCamera(CameraType::PERSPECTIVE, 45.0f, 0.1f, 100.0f);
-    gameScenecamera->transform.position = glm::vec3(0, 1.00, 5);
+    gameScenecamera->transform.position = glm::vec3(0, 1.00, 35.0f);
     gameScenecamera->transform.SetRotation(glm::vec3(0));
 
     renderTextureCamera->InitializeCamera(CameraType::PERSPECTIVE, 45.0f, 0.1f, 100.0f);

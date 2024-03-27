@@ -40,6 +40,8 @@ FlockManager::FlockManager()
 
     //currentBehaviour = GetBehaviourState(Behaviour::ALIGNMENT);
 
+    IntializeFlocks(0);
+
 }
 
 
@@ -48,12 +50,6 @@ FlockManager::~FlockManager()
     Destroy();
 }
 
-//FlockManager& FlockManager::GetInstance()
-//{
-//    static FlockManager instance;
-//
-//    return instance;
-//}
 
 void FlockManager::Start()
 {
@@ -61,25 +57,10 @@ void FlockManager::Start()
     squareNeighbourRadius = neighbourRadius * neighbourRadius;
     squareAvoidanceRadius = squareNeighbourRadius * avoidanceRadiusMultiplier * avoidanceRadiusMultiplier;
 
-    for (int i = 0; i < flockAgentCount; i++)
-    {
-        glm::vec2 position = Math::randomInsideUnitCircle() * (float)flockAgentCount * agentDensity;
-       // position.x = Math::GetRandomFloatNumber(-5, 5);
-       // position.y = Math::GetRandomFloatNumber(-5, 5);
-        FlockAgent* newAgent = new FlockAgent(glm::vec3(position,0));
+    allAgentSpawned = false;
 
-        glm::vec3 forward = glm::vec3(0, 0, 1);
-        float randomValue = Math::GetRandomFloatNumber(0.0f, 360.0f);
-
-        newAgent->transform.SetRotation(forward * randomValue);
-
-        newAgent->name = "Agent " + std::to_string(i);
-        
-        AddAgent(newAgent);
-
-    }
-
-    allAgentSpawned = true;
+    IntializeFlocks(listOfFlockAgents.size());
+  
 }
 
 void FlockManager::Update(float deltaTime)
@@ -135,32 +116,37 @@ void FlockManager::DrawProperties()
 {
     Entity::DrawProperties();
 
-    if (!ImGui::TreeNodeEx("FlockManager", ImGuiTreeNodeFlags_DefaultOpen))
-    {
-        return;
-    }
-
-    ImGui::Text("Show debug");
-    ImGui::SameLine();
-    if (!ImGui::Checkbox("###ShowDebug",&showDebug))
-    {
-        ImGui::Text("Avoidaance Multiplier");
-        ImGui::SameLine();
-        ImGui::DragFloat("##AvoidaanceMultiplier", &avoidanceRadiusMultiplier, 0.1f, 0, 0, "%0.2f");
-
-        ImGui::Text("Neighbour radius");
-        ImGui::SameLine();
-        ImGui::DragFloat("##Neighbourradius", &neighbourRadius, 0.1f, 0, 0, "%0.2f");
-
-    }
- 
-
-    ImGui::TreePop();
+    DrawFlockManagerProperties();
 }
 
 void FlockManager::SceneDraw()
 {
     Entity::SceneDraw();
+}
+
+void FlockManager::IntializeFlocks(int alreadySpawnedCount)
+{
+    int agentRequiredCount = flockAgentCount - alreadySpawnedCount;
+
+    for (int i = 0; i < agentRequiredCount; i++)
+    {
+        glm::vec2 position = Math::randomInsideUnitCircle() * ((float)flockAgentCount +(float)agentRequiredCount)  * agentDensity;
+        // position.x = Math::GetRandomFloatNumber(-5, 5);
+        // position.y = Math::GetRandomFloatNumber(-5, 5);
+        FlockAgent* newAgent = new FlockAgent(glm::vec3(position, 0));
+
+        glm::vec3 forward = glm::vec3(0, 0, 1);
+        float randomValue = Math::GetRandomFloatNumber(0.0f, 360.0f);
+
+        newAgent->transform.SetRotation(forward * randomValue);
+
+        newAgent->name = "Agent " + std::to_string(listOfFlockAgents.size() + 1);
+
+        AddAgent(newAgent);
+
+    }
+
+    allAgentSpawned = true;
 }
 
 void FlockManager::AddAgent(FlockAgent* agent)
@@ -208,6 +194,40 @@ BaseBehaviour* FlockManager::GetCurrentBehaviour()
     return currentBehaviour;
 }
 
+void FlockManager::DrawFlockManagerProperties()
+{
+    if (!ImGui::TreeNodeEx("FlockManager", ImGuiTreeNodeFlags_DefaultOpen))
+    {
+        return;
+    }
+
+    ImGui::Text("Show debug");
+    ImGui::SameLine();
+    if (!ImGui::Checkbox("###ShowDebug", &showDebug))
+    {
+        ImGui::Text("Flocks Count");
+        ImGui::SameLine();
+        ImGui::DragInt("##FlockCount", &flockAgentCount, 0.1f, 0, 50);
+
+        ImGui::Text("Avoidaance Radius");
+        ImGui::SameLine();
+        ImGui::DragFloat("##AvoidanceMultiplier", &avoidanceRadiusMultiplier, 0.1f, 0, 0, "%0.2f");
+
+        ImGui::Text("Neighbour radius");
+        ImGui::SameLine();
+        ImGui::DragFloat("##Neighbourradius", &neighbourRadius, 0.1f, 0.0f, 3.0f, "%0.2f");
+
+        ImGui::Text("Max Speed");
+        ImGui::SameLine();
+        ImGui::DragFloat("##maxSpeed", &maxSpeed, 0.1f, 0, 0, "%0.2f");
+
+
+    }
+
+
+    ImGui::TreePop();
+}
+
 float FlockManager::GetSquareAvoidanceRadius()
 {
     return squareAvoidanceRadius;
@@ -226,7 +246,7 @@ std::vector<Transform*> FlockManager::GetNearByObjects(FlockAgent* agent)
 
         //if (distance > 0);
         {
-            if (distance < neighbourRadius)
+            if (distance < neighbourRadius * neighbourRadius)
             {
                 context.push_back(&otheragent->transform);
             }
